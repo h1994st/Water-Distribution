@@ -14,3 +14,13 @@ var c = new WaterBox('C');
 console.log(a.name);
 console.log(b.name);
 console.log(c.name);
+
+a.on('full', function (x) {
+  console.log('控制器：收到水满信号');
+  console.log('多出 ' + x);
+}).on('empty', function (x) {
+  console.log('控制器：收到水空信号');
+  console.log('缺 ' + x);
+}).on('warning', function (x) {
+  console.log('控制器：收到警报');
+});

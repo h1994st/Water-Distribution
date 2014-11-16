@@ -12,8 +12,14 @@ function WaterBox(name, max) {
   EventEmitter.call(this);
   this.name = name || "Water Box";
   var _surplusWater = 0; // 默认为空
-  var _max = max || 100; // 默认100升
+  var _max = max ? max : 100; // 默认100升
   var _warning = 0.1 * _max; // 警戒线为十分之一
+
+  console.log('\n水箱' + this.name + ': ');
+  console.log('\t余量: ' + _surplusWater);
+  console.log('\t上限: ' + _max);
+  console.log('\t警戒线: ' + _warning);
+  console.log();
 
   this.useWater = function(x) {
     // 检查是否会为空
@@ -27,7 +33,7 @@ function WaterBox(name, max) {
     // 检查是否会在警戒线以下
     if (_surplusWater - x <= _warning) {
       console.log(this.name + ' 警报');
-      this.emit('empty', _warning + x - _surplusWater); // 触发警报的消息，并附送参数：需要多少水消除警报
+      this.emit('warning', _warning + x - _surplusWater); // 触发警报的消息，并附送参数：需要多少水消除警报
     };
     _surplusWater -= x; // 用水
     console.log(this.name + ' 余量：' + _surplusWater);
