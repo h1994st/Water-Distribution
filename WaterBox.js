@@ -8,9 +8,10 @@
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
-function WaterBox(name, max) {
+function WaterBox(name, max, delegate) {
   EventEmitter.call(this);
   this.name = name || "Water Box";
+  this.delegate = delegate;
   var _surplusWater = 0; // 默认为空
   var _max = max ? max : 100; // 默认100升
   var _warning = 0.1 * _max; // 警戒线为十分之一
