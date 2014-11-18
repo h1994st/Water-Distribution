@@ -28,8 +28,8 @@ Simulation of water distribution
 5. Install dependencies
 
 	```bash
-	$ sudo npm install // 安装Node.js依赖
-	$ sudo bower install // 安装前端页面依赖
+	$ [sudo] npm install // 安装Node.js依赖，可能要sudo
+	$ bower install // 安装前端页面依赖
 	```
 
 6. Start
