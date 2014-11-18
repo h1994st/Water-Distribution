@@ -1,0 +1,25 @@
+{
+  "name": "WaterDistribution",
+  "version": "0.0.1",
+  "homepage": "https://github.com/h1994st/Water-Distribution",
+  "authors": [
+    "h1994st <h1994st@gmail.com>"
+  ],
+  "description": "Water Distribution",
+  "keywords": [
+    "Water",
+    "Distribution"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper": "~0.9.20"
+  }
+}
