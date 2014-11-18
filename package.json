@@ -15,7 +15,7 @@
     "jade": "~1.3.0"
   },
   "description": "Water Distribution",
-  "main": "main.js",
+  "main": "app.js",
   "devDependencies": {},
   "repository": {
     "type": "git",
