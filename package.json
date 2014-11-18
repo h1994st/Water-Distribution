@@ -1,0 +1,34 @@
+{
+  "name": "WaterDistribution",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "jade": "~1.3.0"
+  },
+  "description": "Water Distribution",
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/h1994st/Water-Distribution.git"
+  },
+  "keywords": [
+    "Water",
+    "Distribution"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/h1994st/Water-Distribution/issues"
+  },
+  "homepage": "https://github.com/h1994st/Water-Distribution"
+}
