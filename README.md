@@ -35,7 +35,7 @@ Simulation of water distribution
 6. Start
 
 	```bash
-	$ node main.js // 近后端逻辑
+	$ node main.js // 仅后端逻辑
 
 	$ npm start // 启动网页，访问http://localhost:3000即可
 	```
