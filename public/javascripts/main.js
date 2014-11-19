@@ -64,7 +64,7 @@ var inputData = {
     }
   ]
 };
-var recyclerChart = new Chart(inputCxt).Bar(inputData);
+var inputChart = new Chart(inputCxt).Bar(inputData);
 
 // Console
 function Console(consoleID) {
@@ -101,3 +101,42 @@ socket.on('update', function (data) {
 
     waterBoxsChart.update();
 });
+
+
+socket.on('waterbox',function(data){
+    console.log('waterbox' + data);
+
+    for (var i = 0; i < waterBoxsChart.datasets[0].bars.length; i++) {
+        waterBoxsChart.datasets[0].bars[i].value = data[i];
+    };
+    waterBoxsChart.update();
+});
+
+socket.on('recycler',function(data){
+    console.log('recycler' + data);
+
+    for (var i = 0; i < recyclerChart.datasets[0].bars.length; i++) {
+        recyclerChart.datasets[0].bars[i].value = data[i];
+    };
+
+    recyclerChart.update();
+
+});
+
+socket.on('input',function(data){
+    for (var i = 0; i < inputChart.datasets.length; i++) {
+        inputChart.datasets[i].bars[0].value = data[i];
+    };
+
+    inputChart.update();
+});
+
+socket.on('console',function(data){
+
+    myConsole.log(data);
+    
+});
+
+
+
+
