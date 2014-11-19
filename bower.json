@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "paper": "~0.9.20"
+    "Chart.js": "1.0.1-beta.4"
   }
 }

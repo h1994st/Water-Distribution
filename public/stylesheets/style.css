@@ -1,8 +1,14 @@
 body {
-  padding: 50px;
+  height: 100%;
+  width: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+textarea {
+  resize: none;
+  width: 100%;
+  overflow-x: hidden;
+  border: none;
+  height: 100%;
 }

@@ -1,6 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  canvas#main-canvas
+  main.container
+    div.row
+      div.col-sm-6
+        div.panel.panel-success
+          div.panel-heading Water Boxs
+          div.panel-body(style='padding: 0;')
+            canvas#water-box-canvas
+      div.col-sm-6
+        div.panel.panel-success
+          div.panel-heading Recycler (Clean Water)
+          div.panel-body(style='padding: 0;')
+            canvas#recycler-canvas
+    div.row
+      div.col-sm-6
+        div.panel.panel-success
+          div.panel-heading Water Input (Comparision)
+          div.panel-body(style='padding: 0;')
+            canvas#input-canvas
+      div.col-sm-6
+        div.panel.panel-success
+          div.panel-heading Console
+          div.panel-body(style='padding: 0;')
+            textarea#console.console(name="console", cols="30", rows="30", placeholder="输出信息" readonly)
+            
+
+  
