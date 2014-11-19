@@ -15,38 +15,6 @@ misc.waterRecycler = waterRecycler;
 var controller = new WaterController();
 controller.initWaterBox();
 
-// a.on('full', function (x) {
-//   console.log('控制器：收到水满信号');
-//   console.log('多出 ' + x);
-// }).on('empty', function (x) {
-//   console.log('控制器：收到水空信号');
-//   console.log('缺 ' + x);
-// }).on('warning', function (x) {
-//   console.log('控制器：收到警报');
-// });
-// b.on('full', function (x) {
-//   console.log('控制器：收到水满信号');
-//   console.log('多出 ' + x);
-// }).on('empty', function (x) {
-//   console.log('控制器：收到水空信号');
-//   console.log('缺 ' + x);
-// }).on('warning', function (x) {
-//   console.log('控制器：收到警报');
-// });
-// c.on('full', function (x) {
-//   console.log('控制器：收到水满信号');
-//   console.log('多出 ' + x);
-// }).on('empty', function (x) {
-//   console.log('控制器：收到水空信号');
-//   console.log('缺 ' + x);
-// }).on('warning', function (x) {
-//   console.log('控制器：收到警报');
-// });
-
-// a.addWater(100);
-// b.addWater(100);
-// c.addWater(100);
-
 setInterval(function () {
   setTimeout(function () {
     console.log();
