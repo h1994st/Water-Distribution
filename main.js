@@ -5,63 +5,81 @@
  * @version 0.0.1
  */
 
-var WaterBox = require('./WaterBox');
+var misc = require('./misc').global;
+var WaterController = require('./WaterController');
+var WaterRecycler = require('./WaterRecycler');
 
-var a = new WaterBox('A');
-var b = new WaterBox('B');
-var c = new WaterBox('C');
+var waterRecycler = new WaterRecycler();
+misc.waterRecycler = waterRecycler;
 
-console.log(a.name);
-console.log(b.name);
-console.log(c.name);
+var controller = new WaterController();
+controller.initWaterBox();
 
-a.on('full', function (x) {
-  console.log('控制器：收到水满信号');
-  console.log('多出 ' + x);
-}).on('empty', function (x) {
-  console.log('控制器：收到水空信号');
-  console.log('缺 ' + x);
-}).on('warning', function (x) {
-  console.log('控制器：收到警报');
-});
-b.on('full', function (x) {
-  console.log('控制器：收到水满信号');
-  console.log('多出 ' + x);
-}).on('empty', function (x) {
-  console.log('控制器：收到水空信号');
-  console.log('缺 ' + x);
-}).on('warning', function (x) {
-  console.log('控制器：收到警报');
-});
-c.on('full', function (x) {
-  console.log('控制器：收到水满信号');
-  console.log('多出 ' + x);
-}).on('empty', function (x) {
-  console.log('控制器：收到水空信号');
-  console.log('缺 ' + x);
-}).on('warning', function (x) {
-  console.log('控制器：收到警报');
-});
+// a.on('full', function (x) {
+//   console.log('控制器：收到水满信号');
+//   console.log('多出 ' + x);
+// }).on('empty', function (x) {
+//   console.log('控制器：收到水空信号');
+//   console.log('缺 ' + x);
+// }).on('warning', function (x) {
+//   console.log('控制器：收到警报');
+// });
+// b.on('full', function (x) {
+//   console.log('控制器：收到水满信号');
+//   console.log('多出 ' + x);
+// }).on('empty', function (x) {
+//   console.log('控制器：收到水空信号');
+//   console.log('缺 ' + x);
+// }).on('warning', function (x) {
+//   console.log('控制器：收到警报');
+// });
+// c.on('full', function (x) {
+//   console.log('控制器：收到水满信号');
+//   console.log('多出 ' + x);
+// }).on('empty', function (x) {
+//   console.log('控制器：收到水空信号');
+//   console.log('缺 ' + x);
+// }).on('warning', function (x) {
+//   console.log('控制器：收到警报');
+// });
 
-a.addWater(100);
-b.addWater(100);
-c.addWater(100);
-
-console.log();
+// a.addWater(100);
+// b.addWater(100);
+// c.addWater(100);
 
 setInterval(function () {
   setTimeout(function () {
+    console.log();
+    console.log();
     var p = Math.floor(Math.random() * 100);
     console.log(new Date());
-    var w = Math.floor(Math.random() * 100);
+    var w = Math.floor(Math.random() * 20);
     console.log('Use Water: ' + w);
     if (p < 20) {
-      a.useWater(w);
+      controller.water_box[0].useWater(w);
     } else if (p < 75) {
-      b.useWater(w);
+      controller.water_box[1].useWater(w);
     } else {
-      c.useWater(w);
+      controller.water_box[2].useWater(w);
     }
     console.log();
+    output();
   }, Math.floor(Math.random() * 1000));
-}, 500);
+}, 1000);
+
+// setInterval(function(){
+//   }, 1000);
+
+var output = function(){
+  console.log('总输入量：' + misc._input);
+  console.log('对比输入量：' + misc._input_compare);
+  console.log('用户需水池状况：');
+  console.log('A水箱水量：' + controller.water_box[0].amount);
+  console.log('B水箱水量：' + controller.water_box[1].amount);
+  console.log('C水箱水量：' + controller.water_box[2].amount);
+  console.log('净水设施水存储状况：');
+  console.log('A类水剩余：' + misc.waterRecycler.amount[0]);
+  console.log('B类水剩余：' + misc.waterRecycler.amount[1]);
+  console.log('C类水剩余：' + misc.waterRecycler.amount[2]);
+
+}
