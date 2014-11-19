@@ -9,4 +9,4 @@ var HomeController = {};
 
 
 
-exports = module.exports = WaterController;
+exports = module.exports = HomeController;
