@@ -6,10 +6,21 @@
  */
 
 var WaterBox = require('./WaterBox');
+var WaterRecycler = require('./WaterRecycler');
+var WaterController = require('./WaterController');
 
 var a = new WaterBox('A');
 var b = new WaterBox('B');
 var c = new WaterBox('C');
+
+var recycler = new WaterRecycler();
+var controller = new WaterController(a, b, c, recycler);
+a.controller = controller;
+b.controller = controller;
+c.controller = controller;
+
+
+
 
 console.log(a.name);
 console.log(b.name);

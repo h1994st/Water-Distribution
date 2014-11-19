@@ -8,10 +8,11 @@
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
-function WaterBox(name, max, delegate) {
+function WaterBox(name, max, controller) {
   EventEmitter.call(this);
   this.name = name || "Water Box";
-  this.delegate = delegate; // 代理，留给之后的HomeController
+  this.controller = controller; // 代理，留给之后的HomeController
+
   var _surplusWater = 0; // 默认为空
   var _max = max ? max : 100; // 默认100升
   var _warning = 0.1 * _max; // 警戒线为十分之一
@@ -21,6 +22,8 @@ function WaterBox(name, max, delegate) {
   console.log('\t上限: ' + _max);
   console.log('\t警戒线: ' + _warning);
   console.log();
+
+  this.on('full')
 
   this.useWater = function(x) {
     // 检查是否会为空

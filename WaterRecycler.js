@@ -7,15 +7,13 @@
 
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
+var misc = require('misc');
 
 function WaterRecycler() {
-
 	EventEmitter.call(this);
 
 	this.amount = [0, 0, 0];		//净水系统A B C水箱的剩余水量，初始均为0
 	this.GETWATERFLAG = [true, true, true];
-
-	var _box_name = ['A', 'B', 'C'];	//水箱名
 
 	this.recycleWater = function(input) {					//净化水，input为流入污水量
 		var c = Math.floor(input * Math.random());
@@ -39,7 +37,7 @@ function WaterRecycler() {
 		console.log('C水箱：' + this.amount[2]);
 	};
 
-	this.getWater = function(need, type){		//x为需水量，type为需水类型: 0-A 1-B 2-C
+	this.getWater = function(need, type, controller, origin_type, origin_need){		//x为需水量，type为需水类型: 0-A 1-B 2-C
 		while(true){
 			if(this.GETWATERFLAG[type]){
 				this.GETWATERFLAG[type] = false;
@@ -50,22 +48,22 @@ function WaterRecycler() {
 		if(this.amount[type] >= need){
 			this.amount[type] -= need;
 			GETWATERFLAG[type] = true;
-			console.log(this._box_name[i] + ‘水箱出水：’ + need);
-			this.emit('enough');			//向controller发送水充足消息
+			console.log(misc._box_name[i] + ‘水箱出水：’ + need);
+			controller.emit('enough', origin_need, origin_type);			//向controller发送水充足消息，附带参数：共加多少水，目的水的类型
 			return;
 		};
 
 		need -= this.amount[type];
-		console.log(this._box_name[i] + ‘水箱出水：’ + this.amount[type]);
+		console.log(misc._box_name[i] + ‘水箱出水：’ + this.amount[type]);
 		this.amount[type] = 0;
 		GETWATERFLAG[type] = true;
 
 		if(0 == type){
-			this.emit('not_enough', need);	//向controller发送水不足消息，附带参数：还缺多少水
+			controller.emit('not_enough', need, origin_need - need, origin_type);	//向controller发送水不足消息，附带参数：还缺多少水，共加多少水，目的水的类型
 			return;
 		};
 
-		this.getWater(need, type-1);		//向较高优先级的的水箱要水
+		this.getWater(need, type-1, controller, origin_type, origin_need);		//向较高优先级的的水箱要水
 		
 	};
 
