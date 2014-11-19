@@ -49,5 +49,4 @@ var output = function(){
   console.log('A类水剩余：' + misc.waterRecycler.amount[0]);
   console.log('B类水剩余：' + misc.waterRecycler.amount[1]);
   console.log('C类水剩余：' + misc.waterRecycler.amount[2]);
-
 }
