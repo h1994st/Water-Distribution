@@ -7,13 +7,13 @@
 
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
-var misc = require('misc');
+var misc = require('./misc').global;
 
 function WaterRecycler() {
 	EventEmitter.call(this);
 
 	this.amount = [0, 0, 0];		//净水系统A B C水箱的剩余水量，初始均为0
-	this.GETWATERFLAG = [true, true, true];
+	this.GETWATERFLAG = [false, false, false];
 
 	this.recycleWater = function(input) {					//净化水，input为流入污水量
 		var c = Math.floor(input * Math.random());
@@ -31,7 +31,7 @@ function WaterRecycler() {
 		this.amount[1] += b;
 		this.amount[2] += c;
 
-		console.log('\nWater Recycler剩余水量：');
+		console.log('Water Recycler剩余水量：');
 		console.log('A水箱：' + this.amount[0]);
 		console.log('B水箱：' + this.amount[1]);
 		console.log('C水箱：' + this.amount[2]);
@@ -39,27 +39,27 @@ function WaterRecycler() {
 
 	this.getWater = function(need, type, controller, origin_type, origin_need){		//x为需水量，type为需水类型: 0-A 1-B 2-C
 		while(true){
-			if(this.GETWATERFLAG[type]){
-				this.GETWATERFLAG[type] = false;
+			if(!this.GETWATERFLAG[type]){
+				this.GETWATERFLAG[type] = true;
 				break;
 			};
 		};
 
 		if(this.amount[type] >= need){
 			this.amount[type] -= need;
-			GETWATERFLAG[type] = true;
-			console.log(misc._box_name[i] + ‘水箱出水：’ + need);
-			controller.emit('enough', origin_need, origin_type);			//向controller发送水充足消息，附带参数：共加多少水，目的水的类型
+			this.GETWATERFLAG[type] = false;
+			console.log(misc._box_name[i] + '水箱出水：' + need);
+			controller.getEnoughMessage(origin_need, origin_type);		//向controller发送水充足消息，附带参数：共加多少水，目的水的类型		
 			return;
 		};
 
 		need -= this.amount[type];
-		console.log(misc._box_name[i] + ‘水箱出水：’ + this.amount[type]);
+		console.log(misc._box_name[type] + '水箱出水：' + this.amount[type]);
 		this.amount[type] = 0;
-		GETWATERFLAG[type] = true;
+		this.GETWATERFLAG[type] = false;
 
 		if(0 == type){
-			controller.emit('not_enough', need, origin_need - need, origin_type);	//向controller发送水不足消息，附带参数：还缺多少水，共加多少水，目的水的类型
+			controller.getNotEnoughMessage(need, origin_need - need, origin_type)	//向controller发送水不足消息，附带参数：还缺多少水，共加多少水，目的水的类型
 			return;
 		};
 
