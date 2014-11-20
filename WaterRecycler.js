@@ -16,9 +16,12 @@ function WaterRecycler() {
 	this.GETWATERFLAG = [false, false, false];
 
 	this.recycleWater = function(input) {					//净化水，input为流入污水量
-		var c = Math.floor(input * Math.random());
-		var b = Math.floor(Math.random() * (input - c));
-		var a = Math.floor(Math.random() * (input - c - b));
+		var c = input * Math.random();
+		var b = Math.random() * (input - c);
+		var a = input - c - b;
+		a = Math.floor(a);
+		b = Math.floor(b);
+		c = Math.floor(c);
 		var sewage = input - a - b - c;
 
 		misc.io.emit('console', 'Recycler Get: Waste water: ' + input + '   Output A: ' + a + ' B: '+ b + ' C: ' + c + ' sewage: ' + sewage);
