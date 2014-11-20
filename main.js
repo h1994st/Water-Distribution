@@ -81,7 +81,9 @@ function reset() {
 function useWaterA() {
     init();
     // console.log('use A');
-    controller.water_box[0].useWater(Math.floor(Math.random() * misc._random_amount));
+    var need = Math.floor(Math.random() * misc._random_amount);
+    misc._input_compare += need;          //对比参照
+    controller.water_box[0].useWater(need);
 
     output();
 };
@@ -89,7 +91,9 @@ function useWaterA() {
 function useWaterB() {
     init();
     // console.log('use B');
-    controller.water_box[1].useWater(Math.floor(Math.random() * misc._random_amount));
+    var need = Math.floor(Math.random() * misc._random_amount);
+    misc._input_compare += need;          //对比参照
+    controller.water_box[1].useWater(need);
 
     output();
 };
@@ -97,7 +101,9 @@ function useWaterB() {
 function useWaterC() {
     init();
     // console.log('use C');
-    controller.water_box[2].useWater(Math.floor(Math.random() * misc._random_amount));
+    var need = Math.floor(Math.random() * misc._random_amount);
+    misc._input_compare += need;          //对比参照
+    controller.water_box[2].useWater(need);
 
     output();
 };
