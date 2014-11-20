@@ -184,6 +184,9 @@ $('#A-btn').on('click', function (event) {
     event.preventDefault();
 
     socket.emit('useA');
+
+    $('#reset-btn').removeClass('disabled');
+    $('#reset-btn').removeAttr("disabled");
 });
 
 $('#B-btn').on('click', function (event) {
@@ -191,6 +194,9 @@ $('#B-btn').on('click', function (event) {
     event.preventDefault();
 
     socket.emit('useB');
+
+    $('#reset-btn').removeClass('disabled');
+    $('#reset-btn').removeAttr("disabled");
 });
 
 $('#C-btn').on('click', function (event) {
@@ -198,4 +204,7 @@ $('#C-btn').on('click', function (event) {
     event.preventDefault();
 
     socket.emit('useC');
+
+    $('#reset-btn').removeClass('disabled');
+    $('#reset-btn').removeAttr("disabled");
 });
