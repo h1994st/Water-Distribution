@@ -40,6 +40,7 @@ function start() {
             console.log(new Date());
             var w = Math.floor(Math.random() * misc._random_amount);
             console.log('Use Water: ' + w);
+            misc._input_compare += w;          //对比参照
             if (p < 20) {
                 controller.water_box[0].useWater(w);
             } else if (p < 75) {
