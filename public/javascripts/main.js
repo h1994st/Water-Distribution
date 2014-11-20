@@ -92,17 +92,6 @@ function Console(consoleID) {
 var myConsole = new Console("console");
 
 // Update & Socket.io
-socket.on('update', function (data) {
-    console.log('update: ' + data);
-
-    for (var i = 0; i < waterBoxsChart.datasets[0].bars.length; i++) {
-        waterBoxsChart.datasets[0].bars[i].value = data[i];
-    };
-
-    waterBoxsChart.update();
-});
-
-
 socket.on('waterbox',function(data){
     console.log('waterbox: ' + data);
 
@@ -198,12 +187,14 @@ $('#A-btn').on('click', function (event) {
 });
 
 $('#B-btn').on('click', function (event) {
+    console.log('Use B: ' + new Date());
     event.preventDefault();
 
     socket.emit('useB');
 });
 
 $('#C-btn').on('click', function (event) {
+    console.log('Use C: ' + new Date());
     event.preventDefault();
 
     socket.emit('useC');
