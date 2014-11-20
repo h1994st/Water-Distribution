@@ -9,7 +9,7 @@ var misc = require('./misc').global;
 var WaterController = require('./WaterController');
 var WaterRecycler = require('./WaterRecycler');
 
-var mainIntervalID, consoleIntervalID;
+var mainIntervalID, mainTimeoutID, consoleIntervalID;
 
 var waterRecycler;
 var controller;
@@ -35,7 +35,7 @@ function init() {
 function start() {
     init();
     mainIntervalID = setInterval(function () {
-        setTimeout(function () {
+        mainTimeoutID = setTimeout(function () {
             var p = Math.floor(Math.random() * 100);
             console.log(new Date());
             var w = Math.floor(Math.random() * misc._random_amount);
@@ -57,18 +57,25 @@ function start() {
 
 function pause() {
     clearInterval(mainIntervalID);
+    clearTimeout(mainTimeoutID);
     clearInterval(consoleIntervalID);
 };
 
 function reset() {
+    clearInterval(mainIntervalID);
+    clearTimeout(mainTimeoutID);
+    clearInterval(consoleIntervalID);
+
     waterRecycler = new WaterRecycler();
     misc.waterRecycler = waterRecycler;
 
     controller = new WaterController();
     controller.initWaterBox();
 
-    clearInterval(mainIntervalID);
-    clearInterval(consoleIntervalID);
+    misc._input = 0;
+    misc._input_compare = 0;
+
+    output();
 };
 
 function useWaterA() {
