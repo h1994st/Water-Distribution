@@ -3,27 +3,39 @@ extends layout
 block content
   main.container
     div.row
-      div.col-sm-6
+      div.col-sm-5
         div.panel.panel-success
           div.panel-heading Water Boxs
           div.panel-body(style='padding: 0;')
             canvas#water-box-canvas
-      div.col-sm-6
+      div.col-sm-5
         div.panel.panel-success
           div.panel-heading Recycler (Clean Water)
           div.panel-body(style='padding: 0;')
             canvas#recycler-canvas
+      div.col-sm-2
+        div.panel.panel-default
+          div.panel-heading Manually
+          div.panel-body
+            button#A-btn.btn.btn-primary.btn-lg.btn-block Use A
+            button#B-btn.btn.btn-primary.btn-lg.btn-block Use B
+            button#C-btn.btn.btn-primary.btn-lg.btn-block Use C
     div.row
-      div.col-sm-6
+      div.col-sm-5
         div.panel.panel-success
           div.panel-heading Water Input (Comparision)
           div.panel-body(style='padding: 0;')
             canvas#input-canvas
-      div.col-sm-6
+      div.col-sm-5
         div.panel.panel-success
           div.panel-heading Console
           div.panel-body(style='padding: 0;')
             textarea#console.console(name="console", cols="30", rows="30", placeholder="输出信息" readonly)
-            
-
-  
+      div.col-sm-2
+        div.panel.panel-default
+          div.panel-heading Automatically
+          div.panel-body
+            button#start-btn.btn.btn-success.btn-lg.btn-block Start
+            button#pause-btn.btn.btn-danger.btn-lg.btn-block.disabled(disabled) Pause
+            button#reset-btn.btn.btn-warning.btn-lg.btn-block.disabled(disabled) Reset
+        

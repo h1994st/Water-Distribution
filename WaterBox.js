@@ -39,7 +39,6 @@
 
       this.amount -= need;
       misc.io.emit('console', misc._box_name[type] + '水箱出水：' + need + '  剩余：' + this.amount);
-      console.log();
       this.USEWATERFLAG = false;
 
       if(this.amount < misc._warning_amount){

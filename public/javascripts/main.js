@@ -12,57 +12,57 @@ Chart.defaults.global.responsive = true;
 
 var waterBoxCxt = document.getElementById("water-box-canvas").getContext("2d");
 var waterBoxData = {
-  labels: ["A", "B", "C"],
-  datasets: [
-    {
-      label: "Water Box",
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,0.8)",
-      highlightFill: "rgba(151,187,205,0.75)",
-      highlightStroke: "rgba(151,187,205,1)",
-      data: [65, 59, 80]
-    }
-  ]
+    labels: ["A", "B", "C"],
+    datasets: [
+        {
+            label: "Water Box",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [0, 0, 0]
+        }
+    ]
 };
 var waterBoxsChart = new Chart(waterBoxCxt).Bar(waterBoxData);
 
 var recyclerCxt = document.getElementById("recycler-canvas").getContext("2d");
 var recyclerData = {
-  labels: ["A", "B", "C"],
-  datasets: [
-    {
-      label: "Recycler",
-      fillColor: "rgba(91, 192, 222, 0.5)",
-      strokeColor: "rgba(91, 192, 222, 0.8)",
-      highlightFill: "rgba(91, 192, 222, 0.75)",
-      highlightStroke: "rgba(91, 192, 222, 1)",
-      data: [65, 59, 80]
-    }
-  ]
+    labels: ["A", "B", "C"],
+    datasets: [
+        {
+            label: "Recycler",
+            fillColor: "rgba(91, 192, 222, 0.5)",
+            strokeColor: "rgba(91, 192, 222, 0.8)",
+            highlightFill: "rgba(91, 192, 222, 0.75)",
+            highlightStroke: "rgba(91, 192, 222, 1)",
+            data: [0, 0, 0]
+        }
+    ]
 };
 var recyclerChart = new Chart(recyclerCxt).Bar(recyclerData);
 
 var inputCxt = document.getElementById("input-canvas").getContext("2d");
 var inputData = {
-  labels: ["Water Input (from Water Works)"],
-  datasets: [
-    {
-      label: "With Recycler",
-      fillColor: "rgba(220,220,220,0.5)",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: "rgba(220,220,220,0.75)",
-      highlightStroke: "rgba(220,220,220,1)",
-      data: [65]
-    },
-    {
-      label: "Without Recycler",
-      fillColor: "rgba(217, 83, 79, 0.5)",
-      strokeColor: "rgba(217, 83, 79, 0.8)",
-      highlightFill: "rgba(217, 83, 79, 0.75)",
-      highlightStroke: "rgba(217, 83, 79, 1)",
-      data: [100]
-    }
-  ]
+    labels: ["Water Input (from Water Works)"],
+    datasets: [
+        {
+            label: "With Recycler",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [0]
+        },
+        {
+            label: "Without Recycler",
+            fillColor: "rgba(217, 83, 79, 0.5)",
+            strokeColor: "rgba(217, 83, 79, 0.8)",
+            highlightFill: "rgba(217, 83, 79, 0.75)",
+            highlightStroke: "rgba(217, 83, 79, 1)",
+            data: [0]
+        }
+    ]
 };
 var inputChart = new Chart(inputCxt).Bar(inputData);
 
@@ -104,7 +104,7 @@ socket.on('update', function (data) {
 
 
 socket.on('waterbox',function(data){
-    console.log('waterbox' + data);
+    console.log('waterbox: ' + data);
 
     for (var i = 0; i < waterBoxsChart.datasets[0].bars.length; i++) {
         waterBoxsChart.datasets[0].bars[i].value = data[i];
@@ -112,8 +112,8 @@ socket.on('waterbox',function(data){
     waterBoxsChart.update();
 });
 
-socket.on('recycler',function(data){
-    console.log('recycler' + data);
+socket.on('recycler',function (data){
+    console.log('recycler: ' + data);
 
     for (var i = 0; i < recyclerChart.datasets[0].bars.length; i++) {
         recyclerChart.datasets[0].bars[i].value = data[i];
@@ -123,7 +123,9 @@ socket.on('recycler',function(data){
 
 });
 
-socket.on('input',function(data){
+socket.on('input',function (data){
+    console.log('intput: ' + data);
+
     for (var i = 0; i < inputChart.datasets.length; i++) {
         inputChart.datasets[i].bars[0].value = data[i];
     };
@@ -131,12 +133,78 @@ socket.on('input',function(data){
     inputChart.update();
 });
 
-socket.on('console',function(data){
+socket.on('console',function (data){
 
     myConsole.log(data);
     
 });
 
+// Start & Stop & Reset
+$('#start-btn').on('click', function (event) {
+    event.preventDefault();
 
+    socket.emit('start');
 
+    // Start后，自身不可用
+    $(this).addClass('disabled')
+    $(this).attr('disabled', true);
 
+    // Reset & Pause可用
+    $('#reset-btn').removeClass('disabled');
+    $('#reset-btn').removeAttr("disabled");
+    $('#pause-btn').removeClass('disabled');
+    $('#pause-btn').removeAttr("disabled");
+});
+
+$('#pause-btn').on('click', function (event) {
+    event.preventDefault();
+
+    socket.emit('pause');
+
+    // Pause后，Start可用
+    $('#start-btn').removeClass('disabled');
+    $('#start-btn').removeAttr("disabled");
+
+    // Pause后，自身不可用
+    $(this).addClass('disabled')
+    $(this).attr('disabled', true);
+});
+
+$('#reset-btn').on('click', function (event) {
+    event.preventDefault();
+
+    socket.emit('reset');
+
+    // 清空Console
+    myConsole.clear();
+
+    // Reset后，Start可用
+    $('#start-btn').removeClass('disabled');
+    $('#start-btn').removeAttr("disabled");
+
+    // Reset后，Pause和自身不可用
+    $('#pause-btn').addClass('disabled');
+    $('#pause-btn').attr('disabled', true);
+    $(this).addClass('disabled')
+    $(this).attr('disabled', true);
+});
+
+// A & B & C
+$('#A-btn').on('click', function (event) {
+    console.log('Use A: ' + new Date());
+    event.preventDefault();
+
+    socket.emit('useA');
+});
+
+$('#B-btn').on('click', function (event) {
+    event.preventDefault();
+
+    socket.emit('useB');
+});
+
+$('#C-btn').on('click', function (event) {
+    event.preventDefault();
+
+    socket.emit('useC');
+});

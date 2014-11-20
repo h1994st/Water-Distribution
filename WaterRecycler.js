@@ -41,7 +41,7 @@ function WaterRecycler() {
 		if(this.amount[type] >= need){
 			this.amount[type] -= need;
 			this.GETWATERFLAG[type] = false;
-			misc.io.emit('console', misc._box_name[i] + '水箱出水：' + need);
+			misc.io.emit('console', misc._box_name[type] + '水箱出水：' + need);
 			controller.getEnoughMessage(origin_need, origin_type);		//向controller发送水充足消息，附带参数：共加多少水，目的水的类型		
 			return;
 		};
