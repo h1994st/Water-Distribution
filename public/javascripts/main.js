@@ -44,7 +44,7 @@ var recyclerChart = new Chart(recyclerCxt).Bar(recyclerData);
 
 var inputCxt = document.getElementById("input-canvas").getContext("2d");
 var inputData = {
-    labels: ["Water Input (from Water Works)"],
+    labels: ["from Water Works"],
     datasets: [
         {
             label: "With Recycler",
