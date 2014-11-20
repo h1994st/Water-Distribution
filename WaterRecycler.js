@@ -21,13 +21,13 @@ function WaterRecycler() {
 		var a = Math.floor(Math.random() * (input - c - b));
 		var sewage = input - a - b - c;
 
-		misc.io.emit('console', '净化水：' + input + '\n生成A类水：' + a + '\n生成B类水：'+ b + '\n生成C类水：' + c + '\n剩余污水：' + sewage);
+		misc.io.emit('console', 'Recycler Get: Waste water: ' + input + '   Output A: ' + a + ' B: '+ b + ' C: ' + c + ' sewage: ' + sewage);
 
 		this.amount[0] += a;
 		this.amount[1] += b;
 		this.amount[2] += c;
 
-		misc.io.emit('console', 'Water Recycler剩余水量：' + '\nA水箱：' + this.amount[0] + '\nB水箱：' + this.amount[1] + '\nC水箱：' + this.amount[2]);
+		misc.io.emit('console', 'Recycler Remain: ' + 'A: ' + this.amount[0] + ' B: ' + this.amount[1] + ' C: ' + this.amount[2]);
 	};
 
 	this.getWater = function(need, type, controller, origin_type, origin_need){		//x为需水量，type为需水类型: 0-A 1-B 2-C
@@ -41,13 +41,13 @@ function WaterRecycler() {
 		if(this.amount[type] >= need){
 			this.amount[type] -= need;
 			this.GETWATERFLAG[type] = false;
-			misc.io.emit('console', misc._box_name[type] + '水箱出水：' + need);
+			misc.io.emit('console', 'Recycler Supplies: ' + misc._box_name[type] + ': ' + need);
 			controller.getEnoughMessage(origin_need, origin_type);		//向controller发送水充足消息，附带参数：共加多少水，目的水的类型		
 			return;
 		};
 
 		need -= this.amount[type];
-		misc.io.emit('console', misc._box_name[type] + '水箱出水：' + this.amount[type]);
+		misc.io.emit('console', 'Recycler Supplies: '+ misc._box_name[type] + ': ' + this.amount[type]);
 		this.amount[type] = 0;
 		this.GETWATERFLAG[type] = false;
 

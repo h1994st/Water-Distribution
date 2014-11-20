@@ -32,15 +32,15 @@ function WaterController(){
 	};
 
 	this.getEnoughMessage = function(need, type){
-		misc.io.emit('console', '控制器收到水充足信号');
+		misc.io.emit('console', 'Controller Get: Recycler has enough water');
 		this.water_box[type].addWater(need);
 		this.NEEDWATERFLAG[type] = false;
 	};
 
 	this.getNotEnoughMessage = function(need, add, type){
-		misc.io.emit('console', '控制器收到水不足信号');
+		misc.io.emit('console', 'Controller Get: Recycler supplied ' + add + ' still not enough');
 		this.water_box[type].addWater(add);
-		misc.io.emit('console', '从水塔进水：' + need);
+		misc.io.emit('console', 'Water Works Do: input ' + need);
 		misc._input += need;
 		this.water_box[type].addWater(need);
 		this.NEEDWATERFLAG[type] = false;
@@ -49,7 +49,7 @@ function WaterController(){
 	this.getNeedWaterMessage = function(need, type){
 		if(this.NEEDWATERFLAG[type]) return;
 		this.NEEDWATERFLAG[type] = true;
-		misc.io.emit('console', '控制器收到水箱' + misc._box_name[type] + '的缺水信号');
+		misc.io.emit('console', 'Controller Get: ' + misc._box_name[type] + ' Box need water ');
 		misc.waterRecycler.getWater(need, type, this, type, need);
 	};
 

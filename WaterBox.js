@@ -38,7 +38,7 @@
       };
 
       this.amount -= need;
-      misc.io.emit('console', misc._box_name[type] + '水箱出水：' + need + '  剩余：' + this.amount);
+      misc.io.emit('console', misc._box_name[type] + ' Box out: ' + need + '  remain: ' + this.amount);
       this.USEWATERFLAG = false;
 
       if(this.amount < misc._warning_amount){
@@ -49,15 +49,15 @@
     };
 
     this.needWater = function(){                  //水不足
-      var need = misc._max_amount - this.amount;
+      var need = misc._getwater_amount;
       misc._input_compare += need;          //对比参照
-      misc.io.emit('console', misc._box_name[type] + '水箱缺水：');
+      misc.io.emit('console', misc._box_name[type] + ' Box: Need water require');
       this.controller.getNeedWaterMessage(need, this.type);    //向控制器发送缺水请求
     };
 
     this.addWater = function(add){                //加水
       this.amount += add;
-      misc.io.emit('console', misc._box_name[type] + '水箱加水：' + add + '  剩余：' + this.amount);
+      misc.io.emit('console', misc._box_name[type] + ' Box in: ' + add + '  remain: ' + this.amount);
     };
 
   };

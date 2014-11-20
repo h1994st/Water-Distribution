@@ -38,7 +38,7 @@ function start() {
         setTimeout(function () {
             var p = Math.floor(Math.random() * 100);
             console.log(new Date());
-            var w = Math.floor(Math.random() * 20);
+            var w = Math.floor(Math.random() * misc._random_amount);
             console.log('Use Water: ' + w);
             if (p < 20) {
                 controller.water_box[0].useWater(w);
@@ -47,12 +47,12 @@ function start() {
             } else {
                 controller.water_box[2].useWater(w);
             }
-        }, Math.floor(Math.random() * 1000));
-    }, 1000);
+        }, Math.floor(Math.random() * misc._time));
+    }, misc._time);
 
     consoleIntervalID = setInterval(function () {
         output();
-    }, 1000);
+    }, misc._time);
 };
 
 function pause() {
@@ -74,7 +74,7 @@ function reset() {
 function useWaterA() {
     init();
     console.log('use A');
-    controller.water_box[0].useWater(Math.floor(Math.random() * 20));
+    controller.water_box[0].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
 };
@@ -82,7 +82,7 @@ function useWaterA() {
 function useWaterB() {
     init();
     console.log('use B');
-    controller.water_box[1].useWater(Math.floor(Math.random() * 20));
+    controller.water_box[1].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
 };
@@ -90,7 +90,7 @@ function useWaterB() {
 function useWaterC() {
     init();
     console.log('use C');
-    controller.water_box[2].useWater(Math.floor(Math.random() * 20));
+    controller.water_box[2].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
 };
