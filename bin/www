@@ -23,5 +23,7 @@ io.on('connection', function (socket) {
     socket.on('useA', waterSystem.useWaterA);
     socket.on('useB', waterSystem.useWaterB);
     socket.on('useC', waterSystem.useWaterC);
+
+    waterSystem.output();
 });
 

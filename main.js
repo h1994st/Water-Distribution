@@ -103,6 +103,7 @@ function useWaterC() {
 };
 
 function output() {
+    init();
     io.emit('waterbox', [controller.water_box[0].amount, controller.water_box[1].amount, controller.water_box[2].amount]);
     io.emit('recycler', misc.waterRecycler.amount);
     io.emit('input', [misc._input, misc._input_compare]);
@@ -114,5 +115,6 @@ exports = module.exports = {
     reset: reset,
     useWaterA: useWaterA,
     useWaterB: useWaterB,
-    useWaterC: useWaterC
+    useWaterC: useWaterC,
+    output: output
 };
