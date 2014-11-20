@@ -19,6 +19,7 @@
     this.USEWATERFLAG = false;
 
     this.useWater = function(need){       //用水
+      misc._input_compare += need;          //对比参照
       if(this.amount < need){
         while(this.amount < need){
           this.needWater();
@@ -50,7 +51,7 @@
 
     this.needWater = function(){                  //水不足
       var need = misc._getwater_amount;
-      misc._input_compare += need;          //对比参照
+      // misc._input_compare += need;          //对比参照
       misc.io.emit('console', misc._box_name[type] + ' Box: Need water require');
       this.controller.getNeedWaterMessage(need, this.type);    //向控制器发送缺水请求
     };
