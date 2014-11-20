@@ -19,7 +19,7 @@ var io;
 function init() {
     // lazy init
     if (!waterRecycler || !controller) {
-        console.log('init');
+        // console.log('init');
         waterRecycler = new WaterRecycler();
         misc.waterRecycler = waterRecycler;
 
@@ -80,7 +80,7 @@ function reset() {
 
 function useWaterA() {
     init();
-    console.log('use A');
+    // console.log('use A');
     controller.water_box[0].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
@@ -88,7 +88,7 @@ function useWaterA() {
 
 function useWaterB() {
     init();
-    console.log('use B');
+    // console.log('use B');
     controller.water_box[1].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
@@ -96,7 +96,7 @@ function useWaterB() {
 
 function useWaterC() {
     init();
-    console.log('use C');
+    // console.log('use C');
     controller.water_box[2].useWater(Math.floor(Math.random() * misc._random_amount));
 
     output();
