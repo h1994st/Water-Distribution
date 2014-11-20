@@ -20,7 +20,7 @@ var waterBoxData = {
             strokeColor: "rgba(151,187,205,0.8)",
             highlightFill: "rgba(151,187,205,0.75)",
             highlightStroke: "rgba(151,187,205,1)",
-            data: [0, 0, 0]
+            data: [300, 300, 300]
         }
     ]
 };
@@ -77,6 +77,7 @@ function Console(consoleID) {
 
     Console.prototype.log = function (string) {
         this.consoleMain.value += ("> " + string + "\n");
+        $(this.consoleMain).scrollTop(this.consoleMain.scrollHeight - $(this.consoleMain).height());
     };
 
     Console.prototype.error = function (string) {
