@@ -92,7 +92,7 @@ function Console(consoleID) {
 var myConsole = new Console("console");
 
 // Update & Socket.io
-socket.on('waterbox',function(data){
+socket.on('waterbox', function(data){
     console.log('waterbox: ' + data);
 
     for (var i = 0; i < waterBoxsChart.datasets[0].bars.length; i++) {
@@ -101,7 +101,7 @@ socket.on('waterbox',function(data){
     waterBoxsChart.update();
 });
 
-socket.on('recycler',function (data){
+socket.on('recycler', function (data){
     console.log('recycler: ' + data);
 
     for (var i = 0; i < recyclerChart.datasets[0].bars.length; i++) {
@@ -112,7 +112,7 @@ socket.on('recycler',function (data){
 
 });
 
-socket.on('input',function (data){
+socket.on('input', function (data){
     console.log('intput: ' + data);
 
     for (var i = 0; i < inputChart.datasets.length; i++) {
@@ -122,7 +122,7 @@ socket.on('input',function (data){
     inputChart.update();
 });
 
-socket.on('console',function (data){
+socket.on('console', function (data){
 
     myConsole.log(data);
     
