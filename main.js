@@ -72,7 +72,7 @@ function reset() {
     controller = new WaterController();
     controller.initWaterBox();
 
-    misc._input = 0;
+    misc._input = 3 * misc._init_amount;
     misc._input_compare = 0;
 
     output();

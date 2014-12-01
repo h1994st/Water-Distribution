@@ -46,7 +46,9 @@
         this.needWater();
       };
 
-      misc.waterRecycler.recycleWater(Math.floor(need * Math.random()));    //用后排出的废水直接送往recycler
+      if(2 == this.type) return;
+
+      misc.waterRecycler.recycleWater(Math.floor(need * Math.random()));    //A类和B类用后排出的废水直接送往recycler
     };
 
     this.needWater = function(){                  //水不足
