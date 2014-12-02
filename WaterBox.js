@@ -19,7 +19,6 @@
     this.USEWATERFLAG = false;
 
     this.useWater = function(need){       //用水
-      misc._input_compare += need;          //对比参照
       if(this.amount < need){
         while(this.amount < need){
           this.needWater();
